@@ -1,0 +1,68 @@
+services:
+  whisper-hf:
+    stdin_open: true
+    tty: true
+    image: asr-evaluation-framework-whisper-hf:latest
+    container_name: whisper_hf
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+    volumes:
+      - $PWD:/asr-eval
+      - ${PRETRAINED_MODELS_PATH}:/asr-eval/pretrained_models
+      - ${BENCHMARK_DATASET_PATH}:/asr-eval/data
+      - ./code:/asr-eval/code
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 16gb
+
+  qwen:
+    stdin_open: true
+    tty: true
+    container_name: qwen
+    image: asr-evaluation-framework-qwen:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - $PWD:/asr-eval
+      - ${PRETRAINED_MODELS_PATH}:/asr-eval/pretrained_models
+      - ${BENCHMARK_DATASET_PATH}:/asr-eval/data
+      - ./code:/asr-eval/code
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 16gb
+
+  gemma:
+    stdin_open: true
+    tty: true
+    container_name: gemma
+    image: asr-evaluation-framework-gemma:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+    volumes:
+      - $PWD:/asr-eval
+      - ${PRETRAINED_MODELS_PATH}:/asr-eval/pretrained_models
+      - ${BENCHMARK_DATASET_PATH}:/asr-eval/data
+      - ./code:/asr-eval/code
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 16gb

@@ -1,0 +1,10 @@
+transformers==4.47.1
+datasets==2.15.0
+evaluate==0.4.1
+accelerate==0.25.0
+librosa==0.10.1
+jiwer==3.0.3
+num2words
+tensorboard==2.15.1
+pydub
+num2words
