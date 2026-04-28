@@ -15,7 +15,7 @@ import os
 
 # ── Config ────────────────────────────────────────────────────────────────────
 LANGUAGE                = "malay"
-PATH_TO_MANIFEST_FOLDER = "data/MALT_ST_ANNOTATED_RESULT/ms_whisper"
+PATH_TO_MANIFEST_FOLDER = "data/MALT_ST_ANNOTATED_RESULT/checks/ms_gemma"
 PATH_TO_AUDIO_FOLDER    = "data/to_pass_to_st/passed_30h_st_110326/MS"
 OUTPUT_FOLDER           = "outputs/qwen"
  
