@@ -1,0 +1,24 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Configuration for manifest-free, multi-model transcription.
+#
+# Paths are resolved INSIDE the container (repo root is mounted at /asr-eval),
+# so the host data dir (BENCHMARK_DATASET_PATH in .env) appears as `data/...`.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Folder of .wav files to transcribe (no input manifest needed).
+audio_folder: data
+
+# Where the NeMo manifest is written (-> <output_folder>/manifest.json).
+output_folder: outputs
+
+# Language hint passed to models that accept one (e.g. ms, malay, en).
+# Leave blank / set to null for auto-detect.
+language: English
+
+# Which models to run. Set to false to skip a model entirely.
+# NOTE: keep this block last and one "name: true|false" per indented line.
+models:
+  whisper: true
+  qwen: true
+  gemma: false
+  parakeet: true

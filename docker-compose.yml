@@ -34,6 +34,9 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    environment:
+      - TRANSFORMERS_OFFLINE=1
+      - HF_DATASETS_OFFLINE=1
     volumes:
       - $PWD:/asr-eval
       - ${PRETRAINED_MODELS_PATH}:/asr-eval/pretrained_models
@@ -48,7 +51,30 @@ services:
     stdin_open: true
     tty: true
     container_name: gemma
-    image: asr-evaluation-framework-gemma:latest
+    image: asr-evaluation-framework-gemma:annotation
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+    volumes:
+      - $PWD:/asr-eval
+      - ${PRETRAINED_MODELS_PATH}:/asr-eval/pretrained_models
+      - ${BENCHMARK_DATASET_PATH}:/asr-eval/data
+      - ./code:/asr-eval/code
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 16gb
+
+  parakeet:
+    stdin_open: true
+    tty: true
+    container_name: parakeet
+    image: asr-eval/parakeet:1.0.0
     deploy:
       resources:
         reservations:
